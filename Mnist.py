@@ -83,5 +83,8 @@ model.save("mnist_LeNet.h5")
 
 # Evaluate the performance of our trained model
 scores = model.evaluate(x_test, y_test, verbose=1)
+accuracy_score=scores[1]
+f=open("output.txt","w")
+f.write(str(accuarcy_score))
 print('Test loss:', scores[0])
 print('Test accuracy:', scores[1])
