@@ -41,39 +41,37 @@ num_pixels = x_train.shape[1] * x_train.shape[2]
 
 
 
+# create model
 model = Sequential()
 
-# 2 sets of CRP (Convolution, RELU, Pooling)
-model.add(Conv2D(20, (5, 5),
-                 padding = "same", 
+# 1 set of CRP (Convolution, RELU, Pooling)
+model.add(Conv2D(5, (3, 3),
+                  
                  input_shape = input_shape))
 model.add(Activation("relu"))
-model.add(MaxPooling2D(pool_size = (2, 2), strides = (2, 2)))
+model.add(MaxPooling2D(pool_size = (5,5), strides = (3, 3)))
 
-model.add(Conv2D(50, (5, 5),
-                 padding = "same"))
-model.add(Activation("relu"))
-model.add(MaxPooling2D(pool_size = (2, 2), strides = (2, 2)))
 
 # Fully connected layers (w/ RELU)
 model.add(Flatten())
-model.add(Dense(500))
-model.add(Activation("relu"))
+model.add(Dense(units=5, input_dim=28*28, activation='relu'))
+
 
 # Softmax (for classification)
-model.add(Dense(num_classes))
-model.add(Activation("softmax"))
+model.add(Dense(units=10, activation='softmax'))
+
+from keras.optimizers import RMSprop
            
-model.compile(loss = 'categorical_crossentropy',
-              optimizer = keras.optimizers.Adadelta(),
-              metrics = ['accuracy'])
+model.compile(optimizer=RMSprop(), loss='categorical_crossentropy', 
+             metrics=['accuracy']
+             )
     
 print(model.summary())
 
 
-
+# Training Parameters
 batch_size = 128
-epochs = 5
+epochs = 3
 
 history = model.fit(x_train, y_train,
           batch_size=batch_size,
