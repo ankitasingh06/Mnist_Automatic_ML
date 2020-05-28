@@ -37,3 +37,5 @@ Problem Statement :-
 
 
 "FOR  DETAILED SOLUTION , Please visit my linkedin Article."
+
+https://www.linkedin.com/pulse/integrtion-ml-devops-mlops-ankita-singh
